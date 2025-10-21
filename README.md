@@ -1,4 +1,4 @@
-# ☁️ AWS CloudFormation — Criando sua Primeira Stack  
+# ☁️ AWS CloudFormation: Criando sua Primeira Stack  
 
 ## 📘 Descrição
 Este projeto faz parte do **Bootcamp Santander Code Girls | AWS Cloud Practitioner**, com o objetivo de **implementar a primeira Stack usando AWS CloudFormation**, consolidando os conceitos de *Infrastructure as Code (IaC)*.  

@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  Template para criação da primeira Stack AWS CloudFormation.
+  Inclui um bucket S3 e uma Role IAM com permissões básicas de leitura.
+
+Resources:
+  # 🪣 Bucket S3 para armazenamento
+  MyFirstS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "meu-primeiro-bucket-cloudformation-${AWS::AccountId}"
+      VersioningConfiguration:
+        Status: Enabled
+      Tags:
+        - Key: Projeto
+          Value: CloudFormation
+        - Key: CriadoPor
+          Value: EnaileLopes
+
+  # 👩‍💻 Role IAM para acesso a recursos S3
+  MyIAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "MinhaPrimeiraRole-${AWS::AccountId}"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: S3ReadOnlyPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:ListBucket
+                  - s3:GetObject
+                Resource: "*"
+      Tags:
+        - Key: Projeto
+          Value: CloudFormation
+        - Key: CriadoPor
+          Value: EnaileLopes
+
+Outputs:
+  BucketName:
+    Description: Nome do bucket S3 criado
+    Value: !Ref MyFirstS3Bucket
+  RoleName:
+    Description: Nome da IAM Role criada
+    Value: !Ref MyIAMRole
